@@ -1,0 +1,59 @@
+# Node.js 
+
+node_modules/ 
+
+.env 
+
+package-lock.json 
+
+ 
+
+# Sistema operativo 
+
+.DS_Store 
+
+Thumbs.db 
+
+ 
+
+# Archivos temporales 
+
+*.log 
+
+*.tmp 
+
+*.bak 
+
+ 
+
+# VS Code 
+
+.vscode/ 
+
+ 
+
+# Sistema del servidor 
+
+server.log 
+
+ 
+
+# Archivos de despliegue o pruebas locales 
+
+dist/ 
+
+build/ 
+
+ 
+
+# Archivos del sistema 
+
+*.swp 
+
+*.swo 
+
+ 
+
+# Archivos de sistema o configuraciones personales 
+
+.idea/ 
