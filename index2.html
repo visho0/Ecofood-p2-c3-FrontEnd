@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoFood - Reduciendo el desperdicio alimentario</title>
+    <style>
+        :root {
+            --primary-color: #011602;  /* Negro principal más vibrante */
+            --secondary-color: #dfce81; /* Verde secundario más claro */
+            --light-color: #F1F8E9;    /* Fondo verde muy claro */
+            --dark-color: #2E7D32;     /* Verde oscuro para texto */
+            --accent-color: #dfce81;   /* Amarillo como acento */
+            --text-color: #263238;     /* Color de texto principal */
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-color);
+        }
+        
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+        
+        .btn:hover {
+            background-color: var(--dark-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .hero {
+            /*background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+           */
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('./imagen_frontend.png');
+
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 150px 20px;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--dark-color);
+            position: relative;
+            font-size: 32px;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 15px auto 0;
+        }
+
+        .section-title2 {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary-color);
+            position: relative;
+            font-size: 32px;
+        }
+        
+        .section-title2:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 15px auto 0;
+        }
+        
+        .about {
+            background-color: white;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .mission-vision {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            flex: 1;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 4px solid var(--primary-color);
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .card h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+        
+        .what-we-do {
+            background-color: #E8F5E9;
+        }
+        
+        .services {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            width: 300px;
+            text-align: center;
+            transition: all 0.3s;
+            border-bottom: 4px solid var(--secondary-color);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .service-card i {
+            font-size: 40px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .stats {
+            background: linear-gradient(rgba(76, 175, 80, 0.8), rgba(76, 175, 80, 0.8)), url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+        }
+        
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .stat-item {
+            flex: 1;
+            min-width: 200px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--accent-color);
+        }
+        
+        .how-to-help {
+            background-color: white;
+        }
+        
+        .help-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        
+        .help-item {
+            background-color: #F1F8E9;
+            border-radius: 10px;
+            padding: 30px;
+            width: 250px;
+            text-align: center;
+            transition: all 0.3s;
+            border-left: 4px solid var(--secondary-color);
+        }
+        
+        .help-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+        
+        .help-item i {
+            font-size: 40px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-section h3 {
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+        
+        .contact-info {
+            margin-bottom: 15px;
+        }
+        
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 20px;
+            margin-right: 15px;
+            transition: color 0.3s;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        
+        .newsletter-form input {
+            padding: 12px;
+            width: 100%;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: none;
+            font-size: 14px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+        }
+        
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+        
+        @media (max-width: 768px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .mission-vision {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .hero {
+                padding: 100px 20px;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <img src="./Recurso 7.png" alt="EcoFood Logo">
+                    EcoFood
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#about">Quiénes somos</a></li>
+                    <li><a href="#mission">Misión y Visión</a></li>
+                    <li><a href="#what-we-do">Qué hacemos</a></li>
+                    <li><a href="#stats">Datos</a></li>
+                    <li><a href="#help">Cómo ayudar</a></li>
+                    <li><a href="./auth/login.html" class="btn">Iniciar Sesión</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1 class="fade-in">Reduciendo el desperdicio alimentario</h1>
+            <p class="fade-in delay-1">Promovemos un mundo más justo y sostenible mediante la reducción del desperdicio de alimentos y el empoderamiento de comunidades.</p>
+            <a href="#help" class="btn fade-in delay-2">Únete a nuestra causa</a>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title fade-in">¿Quiénes somos?</h2>
+            <div class="about-content">
+                <div class="about-text fade-in">
+                    <p>EcoFood es una organización comprometida con la reducción del desperdicio alimentario mediante iniciativas educativas, tecnológicas y prácticas cotidianas. Nuestro propósito es promover un mundo más justo y sostenible, empoderando a las personas y comunidades para optimizar el uso de alimentos, minimizar residuos y proteger nuestro planeta.</p>
+                    <p>Somos un equipo diverso formado por expertos en medio ambiente, tecnología y desarrollo comunitario, unidos por un propósito común: generar conciencia, educar y activar soluciones para enfrentar este desafío global.</p>
+                </div>
+                <div class="about-image fade-in delay-1">
+                    <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Equipo EcoFood">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="mission" class="mission">
+        <div class="container">
+            <div class="mission-vision">
+                <div class="card fade-in">
+                    <h3>Nuestra Misión</h3>
+                    <p>Sensibilizar y movilizar a las comunidades locales y globales sobre la importancia de reducir el desperdicio de alimentos, brindando herramientas prácticas, educativas y tecnológicas que permitan a las personas adoptar hábitos sostenibles y responsables para mejorar la seguridad alimentaria y proteger el medio ambiente.</p>
+                </div>
+                <div class="card fade-in delay-1">
+                    <h3>Nuestra Visión</h3>
+                    <p>Un mundo en el cual los alimentos se valoren y aprovechen responsablemente, en donde la seguridad alimentaria esté garantizada para todos y el desperdicio alimentario sea mínimo, generando un impacto positivo significativo en el medio ambiente, la economía y la sociedad.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="what-we-do" class="what-we-do">
+        <div class="container">
+            <h2 class="section-title fade-in">Qué hacemos</h2>
+            <div class="services">
+                <div class="service-card fade-in">
+                    <i class="fas fa-book-open"></i>
+                    <h3>Educamos</h3>
+                    <p>Ofrecemos materiales educativos gratuitos y talleres comunitarios para fomentar prácticas sostenibles en el consumo de alimentos.</p>
+                </div>
+                <div class="service-card fade-in delay-1">
+                    <i class="fas fa-hands-helping"></i>
+                    <h3>Conectamos</h3>
+                    <p>Promovemos alianzas entre productores, comerciantes, consumidores y comunidades para reducir excedentes y aprovechar al máximo los alimentos disponibles.</p>
+                </div>
+                <div class="service-card fade-in delay-2">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>Innovamos</h3>
+                    <p>Utilizamos la tecnología para desarrollar soluciones prácticas, como aplicaciones móviles, plataformas web y redes comunitarias que faciliten la reducción del desperdicio alimentario.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="stats" class="stats">
+        <div class="container">
+            <h2 class="section-title2 fade-in">Datos relevantes sobre la problemática</h2>
+            <div class="stats-container">
+                <div class="stat-item fade-in">
+                    <div class="stat-number">1/3</div>
+                    <p>de los alimentos producidos globalmente se desperdician (FAO, 2021)</p>
+                </div>
+                <div class="stat-item fade-in delay-1">
+                    <div class="stat-number">8-10%</div>
+                    <p>de las emisiones mundiales de gases de efecto invernadero provienen del desperdicio alimentario</p>
+                </div>
+                <div class="stat-item fade-in delay-2">
+                    <div class="stat-number">820M+</div>
+                    <p>personas sufren inseguridad alimentaria en el mundo</p>
+                </div>
+                <div class="stat-item fade-in delay-3">
+                    <div class="stat-number">870M</div>
+                    <p>personas podrían ser alimentadas reduciendo solo un 25% el desperdicio alimentario global</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="help" class="how-to-help">
+        <div class="container">
+            <h2 class="section-title fade-in">Cómo puedes ayudar</h2>
+            <div class="help-items">
+                <div class="help-item fade-in">
+                    <i class="fas fa-shopping-basket"></i>
+                    <h3>Consume responsablemente</h3>
+                    <p>Planifica tus compras y utiliza alimentos de forma eficiente.</p>
+                </div>
+                <div class="help-item fade-in delay-1">
+                    <i class="fas fa-store"></i>
+                    <h3>Apoya iniciativas locales</h3>
+                    <p>Compra productos locales y de temporada.</p>
+                </div>
+                <div class="help-item fade-in delay-2">
+                    <i class="fas fa-bullhorn"></i>
+                    <h3>Difunde conciencia</h3>
+                    <p>Comparte información sobre el impacto del desperdicio alimentario con tu comunidad.</p>
+                </div>
+                <div class="help-item fade-in delay-3">
+                    <i class="fas fa-hands"></i>
+                    <h3>Participa</h3>
+                    <p>Únete a nuestras campañas y eventos para generar cambios significativos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section fade-in">
+                    <h3>Contacto</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> Calle Verde 123, Ciudad Sostenible</p>
+                        <p><i class="fas fa-envelope"></i> contacto@ecofood.org</p>
+                        <p><i class="fas fa-phone"></i> +56 9 1234 5678</p>
+                    </div>
+                </div>
+                <div class="footer-section fade-in delay-1">
+                    <h3>Redes sociales</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i> EcoFoodOficial</a><br>
+                        <a href="#"><i class="fab fa-instagram"></i> @ecofood_oficial</a><br>
+                        <a href="#"><i class="fab fa-twitter"></i> @EcoFood_org</a>
+                    </div>
+                </div>
+                <div class="footer-section fade-in delay-2">
+                    <h3>Inicia Sesión</h3>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Tu correo electrónico" required>
+                        <button type="submit" class="btn">Iniciar Sesión</button>
+                        <a href="./auth/login.html" class="btn">Iniciar Sesión</a>
+                    </form>
+                </div>
+            </div>
+            <div class="copyright fade-in delay-3">
+                <p>&copy; 2023 EcoFood. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
