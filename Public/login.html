@@ -136,11 +136,19 @@
         document.addEventListener('DOMContentLoaded', () => {
             const loginForm = document.getElementById('loginForm');
             const messageDiv = document.getElementById('message');
+            const emailInput = document.getElementById('email');
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const emailFromRegister = urlParams.get('email');
+
+            if (emailFromRegister) {
+                emailInput.value = decodeURIComponent(emailFromRegister);
+            }
 
             loginForm.addEventListener('submit', async (event) => {
                 event.preventDefault();
 
-                const email = document.getElementById('email').value;
+                const email = emailInput.value;
                 const password = document.getElementById('password').value;
 
                 try {
@@ -157,7 +165,6 @@
                     if (response.ok && data.success) {
                         messageDiv.textContent = data.message;
                         messageDiv.style.color = 'green';
-                        // Redirigir al index.html después de un inicio de sesión exitoso
                         window.location.href = '/index.html';
                     } else {
                         messageDiv.textContent = data.message || 'Error al iniciar sesión.';

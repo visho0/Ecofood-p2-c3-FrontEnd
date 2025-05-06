@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro - EcoFood</title>
     <style>
-        /* Aquí puedes incluir estilos CSS similares a login.html o un archivo CSS aparte */
         :root {
             --primary-color: #011602;
             --secondary-color: #dfce81;
@@ -83,6 +82,12 @@
 
         .message {
             margin-top: 15px;
+            color: green;
+            font-weight: bold;
+        }
+
+        .error-message {
+            margin-top: 15px;
             color: red;
             font-weight: bold;
         }
@@ -124,11 +129,44 @@
                 <input type="password" id="confirmPassword" name="confirmPassword" required>
             </div>
             <button type="submit" class="btn">Registrarse</button>
-            <div id="registrationMessage" class="message"></div>
+            <div id="registrationMessage" class="message" style="display: none;"></div>
+            <div id="registrationError" class="error-message" style="display: none;"></div>
         </form>
         <p class="login-link">¿Ya tienes una cuenta? <a href="login.html">Inicia sesión aquí</a></p>
     </div>
 
-    <script src="funciones.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const registerForm = document.getElementById('registerForm');
+            const registrationMessage = document.getElementById('registrationMessage');
+            const registrationError = document.getElementById('registrationError');
+
+            registerForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+
+                if (password !== confirmPassword) {
+                    registrationError.textContent = 'Las contraseñas no coinciden.';
+                    registrationError.style.display = 'block';
+                    registrationMessage.style.display = 'none';
+                    return;
+                }
+
+                setTimeout(function() {
+                    registrationMessage.textContent = 'Registro exitoso.';
+                    registrationMessage.style.display = 'block';
+                    registrationError.style.display = 'none';
+
+                    setTimeout(function() {
+                        window.location.href = 'login.html?email=' + encodeURIComponent(email);
+                    }, 2000);
+                }, 1000);
+            });
+        });
+    </script>
 </body>
 </html>

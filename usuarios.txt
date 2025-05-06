@@ -1,1 +1,3 @@
 Luciano;correo@mail.cl;1234567
+javier;correo2@mail.cl;09876
+javier;correo2@mail.cl;09876

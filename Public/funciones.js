@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-            const response = await fetch('/api/register', { // Asegúrate de que la ruta sea correcta
+            const response = await fetch('/api/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -30,10 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (response.ok && data.success) {
                 registrationMessageDiv.textContent = 'Registro exitoso. Datos guardados (¡INSEGURO!).';
                 registrationMessageDiv.style.color = 'green';
-                // Opcional: Redirigir al usuario a la página de inicio de sesión después de un registro exitoso
-                // setTimeout(() => {
-                //     window.location.href = 'login.html';
-                // }, 2000);
             } else {
                 registrationMessageDiv.textContent = data.message || 'Error al registrar la cuenta.';
                 registrationMessageDiv.style.color = 'red';
