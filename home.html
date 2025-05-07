@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoFood Home</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        
+        header {
+            background-color: #2e7d32;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        
+        header h1 {
+            margin: 0;
+            font-size: 2.2em;
+        }
+        
+        
+        nav {
+            background-color: #1b5e20;
+            padding: 10px 0;
+        }
+        
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+        
+        nav li {
+            margin: 0 15px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+       
+        .filtros {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .filtros h2 {
+            margin-top: 0;
+            color: #2e7d32;
+            font-size: 1.5em;
+        }
+        
+        .filtro-grupo {
+            margin-bottom: 15px;
+        }
+        
+        .filtro-grupo label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .filtro-grupo select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        
+        .productos-lista {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .producto-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .producto-imagen {
+            height: 200px;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+        }
+        
+        .producto-info {
+            padding: 15px;
+        }
+        
+        .producto-titulo {
+            margin: 0 0 10px 0;
+            color: #2e7d32;
+            font-size: 1.2em;
+        }
+        
+        .producto-descripcion {
+            margin: 0 0 15px 0;
+            color: #555;
+        }
+        
+        .producto-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .producto-vencimiento {
+            color: #d32f2f;
+        }
+        
+        .producto-boton {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            text-align: center;
+            text-decoration: none;
+        }
+        
+        .producto-boton:hover {
+            background-color: #1b5e20;
+        }
+        
+        
+        
+    </style>
+</head>
+<body>
+    
+  
+    
+    <div class="container">
+        <h1>Productos Disponibles</h1>
+        
+        <div class="filtros">
+            <h2>Categoría</h2>
+            <div class="filtro-grupo">
+                <label for="categoria">Todas las categorías</label>
+                <select id="categoria">
+                    <option>Todas</option>
+                    <option>Frutas</option>
+                    <option>Verduras</option>
+                    <option>Lácteos</option>
+                    <option>Panadería</option>
+                </select>
+            </div>
+            
+            <div class="filtro-grupo">
+                <label for="ubicacion">Ubicación</label>
+                <select id="ubicacion">
+                    <option>Todas las ubicaciones</option>
+                    <option>Zona Norte</option>
+                    <option>Zona Sur</option>
+                    <option>Centro</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="productos-lista" id="productos-container">
+           
+        </div>
+    </div>
+
+
+    <script>
+        // datos de los productos
+        const productos = [
+            {
+                id: 1,
+                nombre: "Manzanas Orgánicas",
+                descripcion: "Caja de manzanas orgánicas.",
+                categoria: "Frutas",
+                ubicacion: "Zona Norte",
+                vencimiento: "23-04-2025",
+                tipo: "donacion",
+                imagen: "https://via.placeholder.com/300x200?text=Manzanas"
+            },
+            {
+                id: 2,
+                nombre: "Pan Integral",
+                descripcion: "Pan integral recién horneado.",
+                categoria: "Panadería",
+                ubicacion: "Centro",
+                vencimiento: "06-02-2025",
+                tipo: "venta",
+                imagen: "https://via.placeholder.com/300x200?text=Pan"
+            },
+            {
+                id: 3,
+                nombre: "Leche Descremada",
+                descripcion: "Caja de leche descremada.",
+                categoria: "Lácteos",
+                ubicacion: "Zona Sur",
+                vencimiento: "01-01-2025",
+                tipo: "donacion",
+                imagen: "https://via.placeholder.com/300x200?text=Leche"
+            },
+            {
+                id: 4,
+                nombre: "Zanahorias Frescas",
+                descripcion: "Bolsa de zanahorias frescas.",
+                categoria: "Verduras",
+                ubicacion: "Zona Norte",
+                vencimiento: "26-03-2025",
+                tipo: "venta",
+                imagen: "https://via.placeholder.com/300x200?text=Zanahorias"
+            }
+        ];
+
+        // función para mostrar productos
+        function mostrarProductos() {
+            const container = document.getElementById('productos-container');
+            container.innerHTML = '';
+            
+            productos.forEach(producto => {
+                const card = document.createElement('div');
+                card.className = 'producto-card';
+                
+                card.innerHTML = `
+                    <div class="producto-imagen">
+                        <img src="${producto.imagen}" alt="${producto.nombre}" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                    <div class="producto-info">
+                        <h3 class="producto-titulo">${producto.nombre}</h3>
+                        <p class="producto-descripcion">${producto.descripcion}</p>
+                        <div class="producto-meta">
+                            <span class="producto-vencimiento">Vence: ${producto.vencimiento}</span>
+                            <span>${producto.tipo === 'donacion' ? 'Donación' : 'Venta'}</span>
+                        </div>
+                        <a href="#" class="producto-boton">
+                            ${producto.tipo === 'donacion' ? 'Solicitar' : 'Comprar'}
+                        </a>
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            });
+        }
+
+        // función para filtrar productos
+        function filtrarProductos() {
+            const categoria = document.getElementById('categoria').value;
+            const ubicacion = document.getElementById('ubicacion').value;
+            
+            const filtrados = productos.filter(producto => {
+                return (categoria === 'Todas' || producto.categoria === categoria) &&
+                       (ubicacion === 'Todas las ubicaciones' || producto.ubicacion === ubicacion);
+            });
+            
+            mostrarProductos(filtrados);
+        }
+
+        // script para los filtros
+        document.getElementById('categoria').addEventListener('change', filtrarProductos);
+        document.getElementById('ubicacion').addEventListener('change', filtrarProductos);
+
+        // script para mostrar productos al cargar la página
+        window.onload = function() {
+            mostrarProductos();
+        };
+    </script>
+</body>
+</html>
